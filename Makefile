@@ -1,12 +1,13 @@
 NAME = philo
 
-SRCS_PATH = philo
+SRCS_PATH = philo/
 
-SRCS = $(SCRS_PATH)/main.c
+SRCS = $(SRCS_PATH)main.c\
+$(SRCS_PATH)parse_arguments.c\
 
 OBJS = $(SRCS:.c=.o)
 
-HEADER = $(SCRS_PATH)/philo.h
+HEADER = $(SCRS_PATH)philo.h
 
 COMPILER = $(CC)
 
