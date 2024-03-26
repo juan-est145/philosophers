@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_arguments.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan_est145 <juan_est145@student.42.fr>    +#+  +:+       +#+        */
+/*   By: juan <juan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 10:49:09 by juan_est145       #+#    #+#             */
-/*   Updated: 2024/03/26 13:01:25 by juan_est145      ###   ########.fr       */
+/*   Updated: 2024/03/26 17:02:43 by juan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_philo	*parse_arguments(int argc, char *argv[])
 		i = 0;
 		while (argv[j][i] != '\0')
 		{
-			if (!(argv[j][i] >= '0' && argv[j][i] <= '9'))
+			if (!(argv[j][i] >= '0' && argv[j][i] <= '9') && argv[1][0] != '0')
 				return (error_msgs(INVALID_ARGUMENTS));
 			i++;
 		}
