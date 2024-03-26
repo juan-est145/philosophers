@@ -5,6 +5,7 @@ SRCS_PATH = src/
 SRCS = \
 $(SRCS_PATH)main.c\
 $(SRCS_PATH)parse_arguments.c\
+$(SRCS_PATH)error_msgs.c\
 
 OBJS = $(SRCS:.c=.o)
 

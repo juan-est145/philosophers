@@ -6,7 +6,7 @@
 /*   By: juan_est145 <juan_est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 10:49:09 by juan_est145       #+#    #+#             */
-/*   Updated: 2024/03/26 11:37:16 by juan_est145      ###   ########.fr       */
+/*   Updated: 2024/03/26 13:01:25 by juan_est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,14 @@ t_philo	*parse_arguments(int argc, char *argv[])
 		while (argv[j][i] != '\0')
 		{
 			if (!(argv[j][i] >= '0' && argv[j][i] <= '9'))
-				return (NULL);
+				return (error_msgs(INVALID_ARGUMENTS));
+			i++;
 		}
 		j++;
 	}
 	philo_arg = (t_philo *)malloc(sizeof(t_philo));
 	if (philo_arg == NULL)
-		return (NULL);
+		return (error_msgs(MALLOC_ERROR));
 	return (philo_constructor(philo_arg, argc, argv), philo_arg);
 }
 
@@ -52,7 +53,7 @@ static void	philo_constructor(t_philo *philo_arg, int argc, char *argv[])
 		arg_iter++;
 		i++;
 	}
-	if (argc == 6)
+	if (argc == 5)
 		args[4] = -1;
 	philo_arg->num_philo = args[0];
 	philo_arg->time_to_die = args[1];
