@@ -6,7 +6,7 @@
 /*   By: juan <juan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 17:29:19 by juan              #+#    #+#             */
-/*   Updated: 2024/03/27 18:02:34 by juan             ###   ########.fr       */
+/*   Updated: 2024/03/27 18:05:21 by juan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,16 @@ t_program	*init_threads(t_program *program)
 		return (error_msgs(THREAD_JOIN_ERROR));
 	while (++i < program->num_philo)
 	{
-		program->philos[i].last_ate = get_time();
-		if (program->philos[i].last_ate == NULL)
-			return (error_msgs(TIME_FAILURE));
-		return (error_msgs(TIME_FAILURE));
 		if (pthread_create(&program->philos[i].thread, NULL, &philo_routine,
 				&program->philos[i]) != 0)
 			return (error_msgs(THREAD_ERROR));
+	}
+	i = -1;
+	while (++i < program->num_philo)
+	{
+		program->philos[i].last_ate = get_time();
+		if (program->philos[i].last_ate == NULL)
+			return (error_msgs(TIME_FAILURE));
 		if (pthread_join(program->philos[i].thread, NULL) != 0)
 			return (error_msgs(THREAD_JOIN_ERROR));
 	}
