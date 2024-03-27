@@ -6,7 +6,7 @@
 /*   By: juan <juan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 13:29:29 by juan              #+#    #+#             */
-/*   Updated: 2024/03/27 14:15:36 by juan             ###   ########.fr       */
+/*   Updated: 2024/03/27 18:13:53 by juan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ t_program	*prepare_philo(t_program *program)
 		program->philos[i].philos_full_mutex = &program->philos_full_mutex;
 		program->philos[i].status = &program->philos_status;
 		program->philos[i].status_mutex = &program->status_mutex;
+		program->philos[i].program = program;
 	}
 	return (program);
 }

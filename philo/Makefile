@@ -16,7 +16,7 @@ HEADER = $(SRCS_PATH)philo.h
 
 COMPILER = $(CC)
 
-CFLAGS = -Wall -Wextra -Werror 
+CFLAGS = -Wall -Wextra -Werror -pthread
 
 EXEC-NAME-FLAG = -o
 

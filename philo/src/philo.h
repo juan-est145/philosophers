@@ -6,7 +6,7 @@
 /*   By: juan <juan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 10:41:04 by juan_est145       #+#    #+#             */
-/*   Updated: 2024/03/27 17:57:58 by juan             ###   ########.fr       */
+/*   Updated: 2024/03/27 18:33:31 by juan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,41 +14,47 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/time.h>
+#include <unistd.h>
+
+typedef struct s_program	t_program;
+typedef struct s_philo		t_philo;
 
 typedef enum e_status
 {
 	DEAD,
 	ALIVE
-}					t_status;
+}							t_status;
 
 typedef struct s_philo
 {
-	pthread_t		thread;
-	int				id;
-	pthread_mutex_t	*left_fork;
-	pthread_mutex_t	*right_fork;
-	unsigned long	last_ate;
-	int				meals_eaten;
-	int				*philos_full;
-	pthread_mutex_t	*philos_full_mutex;
-	t_status		*status;
-	pthread_mutex_t	*status_mutex;
-}					t_philo;
+	pthread_t				thread;
+	int						id;
+	pthread_mutex_t			*left_fork;
+	pthread_mutex_t			*right_fork;
+	unsigned long			last_ate;
+	int						meals_eaten;
+	int						*philos_full;
+	pthread_mutex_t			*philos_full_mutex;
+	t_status				*status;
+	pthread_mutex_t			*status_mutex;
+	t_program				*program;
+}							t_philo;
 
 typedef struct s_program
 {
-	int				num_philo;
-	int				time_to_die;
-	int				time_to_eat;
-	int				time_to_sleep;
-	int				numb_times_to_eat;
-	int				philos_full;
-	pthread_mutex_t	philos_full_mutex;
-	t_philo			*philos;
-	pthread_mutex_t	*forks;
-	t_status		philos_status;
-	pthread_mutex_t	status_mutex;
-}					t_program;
+	int						num_philo;
+	int						time_to_die;
+	int						time_to_eat;
+	int						time_to_sleep;
+	int						numb_times_to_eat;
+	int						philos_full;
+	pthread_mutex_t			philos_full_mutex;
+	t_philo					*philos;
+	pthread_mutex_t			*forks;
+	t_status				philos_status;
+	pthread_mutex_t			status_mutex;
+}							t_program;
 
 typedef enum e_errors
 {
@@ -58,9 +64,14 @@ typedef enum e_errors
 	THREAD_ERROR,
 	THREAD_JOIN_ERROR,
 	TIME_FAILURE
-}					t_errors;
+}							t_errors;
 
-t_program			*parse_arguments(int argc, char *argv[]);
-void				*error_msgs(t_errors error_type);
-t_program			*prepare_philo(t_program *program);
-t_program			*init_threads(t_program *program);
+t_program					*parse_arguments(int argc, char *argv[]);
+void						*error_msgs(t_errors error_type);
+t_program					*prepare_philo(t_program *program);
+t_program					*init_threads(t_program *program);
+void						*philo_routine(void *philo);
+void						even_philo(t_philo *philo);
+void						odd_philo(t_philo *philo);
+void						*observer_routine(void *arg);
+unsigned long				get_time(void);
