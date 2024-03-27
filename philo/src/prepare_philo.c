@@ -6,7 +6,7 @@
 /*   By: juan <juan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 13:29:29 by juan              #+#    #+#             */
-/*   Updated: 2024/03/27 18:13:53 by juan             ###   ########.fr       */
+/*   Updated: 2024/03/27 18:40:20 by juan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 static t_program	*start_mutex(t_program *program);
 
-
-//TO DO: Time and adding data to last ate property of philo
+// TO DO: Time and adding data to last ate property of philo
 t_program	*prepare_philo(t_program *program)
 {
 	int	i;
@@ -25,6 +24,12 @@ t_program	*prepare_philo(t_program *program)
 			* program->num_philo);
 	if (program->forks == NULL)
 		return (error_msgs(MALLOC_ERROR));
+	program->philos = (t_philo *)malloc(sizeof(t_philo) * program->num_philo);
+	if (program->philos == NULL)
+	{
+		free(program->forks);
+		return (error_msgs(MALLOC_ERROR));
+	}
 	if (start_mutex(program) == NULL)
 		return (NULL);
 	while (++i < program->num_philo)
