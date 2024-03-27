@@ -6,7 +6,7 @@
 /*   By: juan <juan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 13:29:29 by juan              #+#    #+#             */
-/*   Updated: 2024/03/27 14:10:21 by juan             ###   ########.fr       */
+/*   Updated: 2024/03/27 14:15:36 by juan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static t_program	*start_mutex(t_program *program);
 
+
+//TO DO: Time and adding data to last ate property of philo
 t_program	*prepare_philo(t_program *program)
 {
 	int	i;
