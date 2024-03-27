@@ -6,7 +6,7 @@
 /*   By: juan <juan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 10:41:04 by juan_est145       #+#    #+#             */
-/*   Updated: 2024/03/27 12:49:02 by juan             ###   ########.fr       */
+/*   Updated: 2024/03/27 13:24:49 by juan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,12 @@ typedef struct s_philo
 	int				id;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
+	unsigned long	last_ate;
 	int				meals_eaten;
-	t_status		status;
-
+	int				*philos_full;
+	pthread_mutex_t	*philos_full_mutex;
+	t_status		*status;
+	pthread_mutex_t	*status_mutex;
 }					t_philo;
 
 typedef struct s_program
@@ -39,7 +42,12 @@ typedef struct s_program
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				numb_times_to_eat;
+	int				philos_full;
+	pthread_mutex_t	philos_full_mutex;
+	t_philo			*philos;
 	pthread_mutex_t	*forks;
+	t_status		philos_status;
+	pthread_mutex_t	status_mutex;
 }					t_program;
 
 typedef enum e_errors
