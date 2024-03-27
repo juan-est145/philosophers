@@ -6,7 +6,7 @@
 /*   By: juan <juan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 10:41:04 by juan_est145       #+#    #+#             */
-/*   Updated: 2024/03/27 13:24:49 by juan             ###   ########.fr       */
+/*   Updated: 2024/03/27 13:55:54 by juan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,10 @@ typedef struct s_program
 typedef enum e_errors
 {
 	INVALID_ARGUMENTS,
-	MALLOC_ERROR
+	MALLOC_ERROR,
+	MUTEX_INIT_ERROR
 }					t_errors;
 
 t_program			*parse_arguments(int argc, char *argv[]);
 void				*error_msgs(t_errors error_type);
+t_program			*prepare_philo(t_program *program);

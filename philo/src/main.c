@@ -6,7 +6,7 @@
 /*   By: juan <juan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 00:09:59 by juan_est145       #+#    #+#             */
-/*   Updated: 2024/03/27 12:31:06 by juan             ###   ########.fr       */
+/*   Updated: 2024/03/27 13:35:15 by juan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,18 @@
 
 int	main(int argc, char *argv[])
 {
-	t_program	*philo_arg;
+	t_program	*program;
 
 	if (argc >= 5 && argc <= 6)
 	{
-		philo_arg = parse_arguments(argc, argv);
-		if (philo_arg == NULL)
+		program = parse_arguments(argc, argv);
+		if (program == NULL)
 			return (1);
+		if (prepare_philo(program) == NULL)
+		{
+			free(program);
+			return (1);
+		}
 	}
 	else
 		return (printf("You need to provide at least 4 or 5 arguments\n"), 1);

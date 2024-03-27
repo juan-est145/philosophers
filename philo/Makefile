@@ -6,6 +6,7 @@ SRCS = \
 $(SRCS_PATH)main.c\
 $(SRCS_PATH)parse_arguments.c\
 $(SRCS_PATH)error_msgs.c\
+$(SRCS_PATH)prepare_philo.c\
 
 OBJS = $(SRCS:.c=.o)
 
