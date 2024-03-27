@@ -8,6 +8,7 @@ $(SRCS_PATH)parse_arguments.c\
 $(SRCS_PATH)error_msgs.c\
 $(SRCS_PATH)prepare_philo.c\
 $(SRCS_PATH)time_func.c\
+$(SRCS_PATH)threads.c\
 
 OBJS = $(SRCS:.c=.o)
 
