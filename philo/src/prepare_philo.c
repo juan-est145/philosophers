@@ -6,7 +6,7 @@
 /*   By: juan <juan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 13:29:29 by juan              #+#    #+#             */
-/*   Updated: 2024/03/27 14:03:21 by juan             ###   ########.fr       */
+/*   Updated: 2024/03/27 14:10:21 by juan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static t_program	*start_mutex(t_program *program)
 	i = -1;
 	if (pthread_mutex_init(&program->philos_full_mutex, NULL) != 0)
 		return (error_msgs(MUTEX_INIT_ERROR));
+	program->philos_status = ALIVE;
 	if (pthread_mutex_init(&program->status_mutex, NULL) != 0)
 		return (error_msgs(MUTEX_INIT_ERROR));
 	while (++i < program->num_philo)
