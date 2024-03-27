@@ -6,20 +6,20 @@
 /*   By: juan <juan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 10:49:09 by juan_est145       #+#    #+#             */
-/*   Updated: 2024/03/26 17:02:43 by juan             ###   ########.fr       */
+/*   Updated: 2024/03/27 12:32:14 by juan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void	philo_constructor(t_philo *philo_arg, int argc, char *argv[]);
+static void	philo_constructor(t_program *philo_arg, int argc, char *argv[]);
 static int	ft_atoi(char *str);
 
-t_philo	*parse_arguments(int argc, char *argv[])
+t_program	*parse_arguments(int argc, char *argv[])
 {
-	int		i;
-	int		j;
-	t_philo	*philo_arg;
+	int			i;
+	int			j;
+	t_program	*philo_arg;
 
 	j = 1;
 	while (j < argc)
@@ -33,13 +33,13 @@ t_philo	*parse_arguments(int argc, char *argv[])
 		}
 		j++;
 	}
-	philo_arg = (t_philo *)malloc(sizeof(t_philo));
+	philo_arg = (t_program *)malloc(sizeof(t_program));
 	if (philo_arg == NULL)
 		return (error_msgs(MALLOC_ERROR));
 	return (philo_constructor(philo_arg, argc, argv), philo_arg);
 }
 
-static void	philo_constructor(t_philo *philo_arg, int argc, char *argv[])
+static void	philo_constructor(t_program *philo_arg, int argc, char *argv[])
 {
 	int	args[5];
 	int	i;

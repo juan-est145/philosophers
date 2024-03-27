@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan_est145 <juan_est145@student.42.fr>    +#+  +:+       +#+        */
+/*   By: juan <juan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 00:09:59 by juan_est145       #+#    #+#             */
-/*   Updated: 2024/03/26 13:03:33 by juan_est145      ###   ########.fr       */
+/*   Updated: 2024/03/27 12:31:06 by juan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main(int argc, char *argv[])
 {
-	t_philo	*philo_arg;
+	t_program	*philo_arg;
 
 	if (argc >= 5 && argc <= 6)
 	{
