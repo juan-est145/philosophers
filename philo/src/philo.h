@@ -6,7 +6,7 @@
 /*   By: juan <juan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 10:41:04 by juan_est145       #+#    #+#             */
-/*   Updated: 2024/03/27 13:55:54 by juan             ###   ########.fr       */
+/*   Updated: 2024/03/27 17:57:58 by juan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,13 @@ typedef enum e_errors
 {
 	INVALID_ARGUMENTS,
 	MALLOC_ERROR,
-	MUTEX_INIT_ERROR
+	MUTEX_INIT_ERROR,
+	THREAD_ERROR,
+	THREAD_JOIN_ERROR,
+	TIME_FAILURE
 }					t_errors;
 
 t_program			*parse_arguments(int argc, char *argv[]);
 void				*error_msgs(t_errors error_type);
 t_program			*prepare_philo(t_program *program);
+t_program			*init_threads(t_program *program);

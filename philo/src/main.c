@@ -6,7 +6,7 @@
 /*   By: juan <juan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 00:09:59 by juan_est145       #+#    #+#             */
-/*   Updated: 2024/03/27 13:35:15 by juan             ###   ########.fr       */
+/*   Updated: 2024/03/27 17:33:45 by juan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ int	main(int argc, char *argv[])
 			return (1);
 		if (prepare_philo(program) == NULL)
 		{
+			free(program);
+			return (1);
+		}
+		if (init_threads(program) == NULL)
+		{
+			free(program->philos);
 			free(program);
 			return (1);
 		}
