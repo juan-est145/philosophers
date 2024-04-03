@@ -6,7 +6,7 @@
 /*   By: juan <juan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 17:29:19 by juan              #+#    #+#             */
-/*   Updated: 2024/03/27 18:33:36 by juan             ###   ########.fr       */
+/*   Updated: 2024/04/03 17:20:58 by juan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ t_program	*init_threads(t_program *program)
 	i = -1;
 	if (pthread_create(&observer, NULL, &observer_routine, program) != 0)
 		return (error_msgs(THREAD_ERROR));
-	if (pthread_join(observer, NULL) != 0)
-		return (error_msgs(THREAD_JOIN_ERROR));
 	while (++i < program->num_philo)
 	{
 		if (pthread_create(&program->philos[i].thread, NULL, &philo_routine,
 				&program->philos[i]) != 0)
 			return (error_msgs(THREAD_ERROR));
 	}
+	if (pthread_join(observer, NULL) != 0)
+		return (error_msgs(THREAD_JOIN_ERROR));
 	i = -1;
 	while (++i < program->num_philo)
 	{
@@ -46,6 +46,7 @@ void	*philo_routine(void *philo)
 {
 	t_philo	*current_philo;
 
+	printf("Hemos llegado a los filósofos\n");
 	current_philo = (t_philo *)philo;
 	if (current_philo->id % 2 == 0)
 		even_philo(current_philo);
@@ -86,6 +87,7 @@ void	*observer_routine(void *arg)
 {
 	t_program	*program;
 
+	printf("Hemos llegado al observador\n");
 	program = (t_program *)arg;
 	while (1)
 	{
