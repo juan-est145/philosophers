@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 17:29:19 by juan              #+#    #+#             */
-/*   Updated: 2024/04/05 14:30:48 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/05 16:05:23 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ t_program	*init_threads(t_program *program)
 	return (program);
 }
 
-
 // Check that philo has not and will not die
 void	*philo_routine(void *philo)
 {
@@ -50,19 +49,31 @@ void	*philo_routine(void *philo)
 		odd_philo(current_philo);
 	return (current_philo);
 }
-//Need to add a printf message of when has started to think
-//Also, need to improve 
+// Need to add a printf message of when has started to think
+// Also, need to improve
 
 void	even_philo(t_philo *philo)
 {
-	eat_even(philo);
+	while (philo->status != DEAD
+		&& *philo->philos_full != philo->program->num_philo)
+	{
+		eat_even(philo);
+		rest(philo);
+	}
+	printf("Philo %d broke\n", philo->id);
 }
 
-//Need to add a printf message of when has started to think
+// Need to add a printf message of when has started to think
 
 void	odd_philo(t_philo *philo)
 {
-	eat_odd(philo);
+	while (philo->status != DEAD
+		&& *philo->philos_full != philo->program->num_philo)
+	{
+		eat_odd(philo);
+		rest(philo);
+	}
+	printf("Philo %d broke\n", philo->id);
 }
 
 void	*observer_routine(void *arg)
@@ -74,7 +85,10 @@ void	*observer_routine(void *arg)
 	{
 		if (program->philos_status == DEAD
 			|| program->philos_full == program->num_philo)
+		{
+			printf("Observer broke\n");
 			break ;
+		}
 	}
 	return (program);
 }
