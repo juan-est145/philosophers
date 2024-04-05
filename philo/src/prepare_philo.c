@@ -6,14 +6,14 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 13:29:29 by juan              #+#    #+#             */
-/*   Updated: 2024/04/05 13:50:35 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/05 14:02:02 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 static t_program	*start_mutex(t_program *program);
-static void			philo_init_loop(t_program *program);
+static t_program	*philo_init_loop(t_program *program);
 
 // TO DO: Time and adding data to last ate property of philo
 t_program	*prepare_philo(t_program *program)
@@ -29,8 +29,15 @@ t_program	*prepare_philo(t_program *program)
 		return (error_msgs(MALLOC_ERROR));
 	}
 	if (start_mutex(program) == NULL)
+	{
+		free(program->forks);
 		return (NULL);
-	philo_init_loop(program);
+	}
+	if (philo_init_loop(program) == NULL)
+	{
+		free(program->forks);
+		return (NULL);
+	}
 	return (program);
 }
 
@@ -47,25 +54,28 @@ static t_program	*start_mutex(t_program *program)
 	while (++i < program->num_philo)
 	{
 		if (pthread_mutex_init(&program->forks[i], NULL) != 0)
-		{
-			free(program->forks);
 			return (error_msgs(MUTEX_INIT_ERROR));
-		}
 	}
 	return (program);
 }
 
-static void	philo_init_loop(t_program *program)
+static t_program	*philo_init_loop(t_program *program)
 {
-	int	i;
+	int				i;
+	unsigned long	time;
 
 	i = -1;
+	time = get_time();
+	if (time == 0)
+		return (error_msgs(TIME_FAILURE));
 	while (++i < program->num_philo)
 	{
 		program->philos[i].id = i + 1;
 		program->philos[i].left_fork = &program->forks[i];
 		program->philos[i].right_fork = &program->forks[(i + 1)
 			% program->num_philo];
+		program->philos[i].start_time = time;
+		program->philos[i].last_ate = time;
 		program->philos[i].meals_eaten = 0;
 		program->philos[i].philos_full = &program->philos_full;
 		program->philos[i].philos_full_mutex = &program->philos_full_mutex;
@@ -73,4 +83,5 @@ static void	philo_init_loop(t_program *program)
 		program->philos[i].status_mutex = &program->status_mutex;
 		program->philos[i].program = program;
 	}
+	return (program);
 }

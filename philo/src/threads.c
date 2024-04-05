@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 17:29:19 by juan              #+#    #+#             */
-/*   Updated: 2024/04/05 13:41:32 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/05 14:05:59 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,6 @@ t_program	*init_threads(t_program *program)
 	i = -1;
 	while (++i < program->num_philo)
 	{
-		program->philos[i].last_ate = get_time();
-		if (program->philos[i].last_ate == 0)
-			return (error_msgs(TIME_FAILURE));
 		if (pthread_join(program->philos[i].thread, NULL) != 0)
 			return (error_msgs(THREAD_JOIN_ERROR));
 	}
@@ -46,7 +43,6 @@ void	*philo_routine(void *philo)
 {
 	t_philo	*current_philo;
 
-	printf("Hemos llegado a los filósofos\n");
 	current_philo = (t_philo *)philo;
 	if (current_philo->id % 2 == 0)
 		even_philo(current_philo);
@@ -58,28 +54,28 @@ void	*philo_routine(void *philo)
 void	even_philo(t_philo *philo)
 {
 	pthread_mutex_lock(philo->right_fork);
-	printf("%lu %d has taken a fork\n", get_time(), philo->id);
+	printf("%lu %d has taken a fork\n", get_time() - philo->start_time, philo->id);
 	pthread_mutex_lock(philo->left_fork);
-	printf("%lu %d has taken a fork\n", get_time(), philo->id);
-	printf("%lu %d is eating\n", get_time(), philo->id);
+	printf("%lu %d has taken a fork\n", get_time() - philo->start_time, philo->id);
+	printf("%lu %d is eating\n", get_time() - philo->start_time, philo->id);
 	usleep(philo->program->time_to_eat * 1000);
 	pthread_mutex_unlock(philo->right_fork);
 	pthread_mutex_unlock(philo->left_fork);
-	printf("%lu %d is sleeping\n", get_time(), philo->id);
+	printf("%lu %d is sleeping\n", get_time() - philo->start_time, philo->id);
 	usleep(philo->program->time_to_sleep * 1000);
 }
 
 void	odd_philo(t_philo *philo)
 {
 	pthread_mutex_lock(philo->left_fork);
-	printf("%lu %d has taken a fork\n", get_time(), philo->id);
+	printf("%lu %d has taken a fork\n", get_time() - philo->start_time, philo->id);
 	pthread_mutex_lock(philo->right_fork);
-	printf("%lu %d has taken a fork\n", get_time(), philo->id);
-	printf("%lu %d is eating\n", get_time(), philo->id);
+	printf("%lu %d has taken a fork\n", get_time() - philo->start_time, philo->id);
+	printf("%lu %d is eating\n", get_time() - philo->start_time, philo->id);
 	usleep(philo->program->time_to_eat * 1000);
 	pthread_mutex_unlock(philo->left_fork);
 	pthread_mutex_unlock(philo->right_fork);
-	printf("%lu %d is sleeping\n", get_time(), philo->id);
+	printf("%lu %d is sleeping\n", get_time() - philo->start_time, philo->id);
 	usleep(philo->program->time_to_sleep * 1000);
 }
 
@@ -87,7 +83,6 @@ void	*observer_routine(void *arg)
 {
 	t_program	*program;
 
-	printf("Hemos llegado al observador\n");
 	program = (t_program *)arg;
 	while (1)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan <juan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 10:41:04 by juan_est145       #+#    #+#             */
-/*   Updated: 2024/03/27 18:33:31 by juan             ###   ########.fr       */
+/*   Updated: 2024/04/05 13:53:26 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_philo
 	pthread_mutex_t			*left_fork;
 	pthread_mutex_t			*right_fork;
 	unsigned long			last_ate;
+	unsigned long			start_time;
 	int						meals_eaten;
 	int						*philos_full;
 	pthread_mutex_t			*philos_full_mutex;
