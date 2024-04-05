@@ -3,23 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   prepare_philo.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan <juan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 13:29:29 by juan              #+#    #+#             */
-/*   Updated: 2024/03/27 18:40:20 by juan             ###   ########.fr       */
+/*   Updated: 2024/04/05 13:50:35 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 static t_program	*start_mutex(t_program *program);
+static void			philo_init_loop(t_program *program);
 
 // TO DO: Time and adding data to last ate property of philo
 t_program	*prepare_philo(t_program *program)
 {
-	int	i;
-
-	i = -1;
 	program->forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t)
 			* program->num_philo);
 	if (program->forks == NULL)
@@ -32,19 +30,7 @@ t_program	*prepare_philo(t_program *program)
 	}
 	if (start_mutex(program) == NULL)
 		return (NULL);
-	while (++i < program->num_philo)
-	{
-		program->philos[i].id = i + 1;
-		program->philos[i].left_fork = &program->forks[i];
-		program->philos[i].right_fork = &program->forks[(i + 1)
-			% program->num_philo];
-		program->philos[i].meals_eaten = 0;
-		program->philos[i].philos_full = &program->philos_full;
-		program->philos[i].philos_full_mutex = &program->philos_full_mutex;
-		program->philos[i].status = &program->philos_status;
-		program->philos[i].status_mutex = &program->status_mutex;
-		program->philos[i].program = program;
-	}
+	philo_init_loop(program);
 	return (program);
 }
 
@@ -67,4 +53,24 @@ static t_program	*start_mutex(t_program *program)
 		}
 	}
 	return (program);
+}
+
+static void	philo_init_loop(t_program *program)
+{
+	int	i;
+
+	i = -1;
+	while (++i < program->num_philo)
+	{
+		program->philos[i].id = i + 1;
+		program->philos[i].left_fork = &program->forks[i];
+		program->philos[i].right_fork = &program->forks[(i + 1)
+			% program->num_philo];
+		program->philos[i].meals_eaten = 0;
+		program->philos[i].philos_full = &program->philos_full;
+		program->philos[i].philos_full_mutex = &program->philos_full_mutex;
+		program->philos[i].status = &program->philos_status;
+		program->philos[i].status_mutex = &program->status_mutex;
+		program->philos[i].program = program;
+	}
 }
