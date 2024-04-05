@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 13:29:29 by juan              #+#    #+#             */
-/*   Updated: 2024/04/05 14:02:02 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/05 14:22:44 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static t_program	*start_mutex(t_program *program);
 static t_program	*philo_init_loop(t_program *program);
 
-// TO DO: Time and adding data to last ate property of philo
 t_program	*prepare_philo(t_program *program)
 {
 	program->forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t)

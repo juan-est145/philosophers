@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 17:29:19 by juan              #+#    #+#             */
-/*   Updated: 2024/04/05 14:05:59 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/05 14:30:48 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_program	*init_threads(t_program *program)
 	return (program);
 }
 
-// Fix time for printf
+
 // Check that philo has not and will not die
 void	*philo_routine(void *philo)
 {
@@ -50,33 +50,19 @@ void	*philo_routine(void *philo)
 		odd_philo(current_philo);
 	return (current_philo);
 }
+//Need to add a printf message of when has started to think
+//Also, need to improve 
 
 void	even_philo(t_philo *philo)
 {
-	pthread_mutex_lock(philo->right_fork);
-	printf("%lu %d has taken a fork\n", get_time() - philo->start_time, philo->id);
-	pthread_mutex_lock(philo->left_fork);
-	printf("%lu %d has taken a fork\n", get_time() - philo->start_time, philo->id);
-	printf("%lu %d is eating\n", get_time() - philo->start_time, philo->id);
-	usleep(philo->program->time_to_eat * 1000);
-	pthread_mutex_unlock(philo->right_fork);
-	pthread_mutex_unlock(philo->left_fork);
-	printf("%lu %d is sleeping\n", get_time() - philo->start_time, philo->id);
-	usleep(philo->program->time_to_sleep * 1000);
+	eat_even(philo);
 }
+
+//Need to add a printf message of when has started to think
 
 void	odd_philo(t_philo *philo)
 {
-	pthread_mutex_lock(philo->left_fork);
-	printf("%lu %d has taken a fork\n", get_time() - philo->start_time, philo->id);
-	pthread_mutex_lock(philo->right_fork);
-	printf("%lu %d has taken a fork\n", get_time() - philo->start_time, philo->id);
-	printf("%lu %d is eating\n", get_time() - philo->start_time, philo->id);
-	usleep(philo->program->time_to_eat * 1000);
-	pthread_mutex_unlock(philo->left_fork);
-	pthread_mutex_unlock(philo->right_fork);
-	printf("%lu %d is sleeping\n", get_time() - philo->start_time, philo->id);
-	usleep(philo->program->time_to_sleep * 1000);
+	eat_odd(philo);
 }
 
 void	*observer_routine(void *arg)

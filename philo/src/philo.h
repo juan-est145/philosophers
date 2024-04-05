@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 10:41:04 by juan_est145       #+#    #+#             */
-/*   Updated: 2024/04/05 13:53:26 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/05 14:30:39 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,3 +76,5 @@ void						even_philo(t_philo *philo);
 void						odd_philo(t_philo *philo);
 void						*observer_routine(void *arg);
 unsigned long				get_time(void);
+void						eat_even(t_philo *philo);
+void						eat_odd(t_philo *philo);
