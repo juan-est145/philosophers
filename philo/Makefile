@@ -10,6 +10,7 @@ $(SRCS_PATH)prepare_philo.c\
 $(SRCS_PATH)time_func.c\
 $(SRCS_PATH)threads.c\
 $(SRCS_PATH)philo_actions.c\
+$(SRCS_PATH)look_for_deaths.c\
 
 OBJS = $(SRCS:.c=.o)
 

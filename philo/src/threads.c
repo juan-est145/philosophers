@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 17:29:19 by juan              #+#    #+#             */
-/*   Updated: 2024/04/05 16:29:55 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/05 19:26:34 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	*observer_routine(void *arg)
 	program = (t_program *)arg;
 	while (1)
 	{
-		if (program->philos_status == DEAD
+		if (check_deaths(program) == DEAD
 			|| program->philos_full == program->num_philo)
 			break ;
 	}
