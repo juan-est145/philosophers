@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 17:29:19 by juan              #+#    #+#             */
-/*   Updated: 2024/04/05 16:05:23 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/05 16:29:55 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ void	*philo_routine(void *philo)
 void	even_philo(t_philo *philo)
 {
 	while (philo->status != DEAD
-		&& *philo->philos_full != philo->program->num_philo)
+		&& philo->meals_eaten != philo->program->numb_times_to_eat)
 	{
 		eat_even(philo);
 		rest(philo);
+		think(philo);
 	}
-	printf("Philo %d broke\n", philo->id);
 }
 
 // Need to add a printf message of when has started to think
@@ -68,12 +68,12 @@ void	even_philo(t_philo *philo)
 void	odd_philo(t_philo *philo)
 {
 	while (philo->status != DEAD
-		&& *philo->philos_full != philo->program->num_philo)
+		&& philo->meals_eaten != philo->program->numb_times_to_eat)
 	{
 		eat_odd(philo);
 		rest(philo);
+		think(philo);
 	}
-	printf("Philo %d broke\n", philo->id);
 }
 
 void	*observer_routine(void *arg)
@@ -85,10 +85,7 @@ void	*observer_routine(void *arg)
 	{
 		if (program->philos_status == DEAD
 			|| program->philos_full == program->num_philo)
-		{
-			printf("Observer broke\n");
 			break ;
-		}
 	}
 	return (program);
 }
