@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 17:29:19 by juan              #+#    #+#             */
-/*   Updated: 2024/04/05 19:26:34 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/05 19:44:20 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	*philo_routine(void *philo)
 
 void	even_philo(t_philo *philo)
 {
-	while (philo->status != DEAD
+	while (*philo->status != DEAD
 		&& philo->meals_eaten != philo->program->numb_times_to_eat)
 	{
 		eat_even(philo);
@@ -67,7 +67,7 @@ void	even_philo(t_philo *philo)
 
 void	odd_philo(t_philo *philo)
 {
-	while (philo->status != DEAD
+	while (*philo->status != DEAD
 		&& philo->meals_eaten != philo->program->numb_times_to_eat)
 	{
 		eat_odd(philo);
