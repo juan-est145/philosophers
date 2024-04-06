@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 14:58:00 by juan              #+#    #+#             */
-/*   Updated: 2024/04/06 17:30:06 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/06 20:14:38 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static long		get_time_elapsed(struct timeval start, struct timeval current);
 
-unsigned long	get_time(void)
+long	get_time(void)
 {
 	struct timeval	time;
 
