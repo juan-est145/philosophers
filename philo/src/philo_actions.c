@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 14:26:28 by juestrel          #+#    #+#             */
-/*   Updated: 2024/04/06 19:11:27 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/06 19:54:39 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 //		best_usleep(1 * 1000);
 //This condition passes the "5 800 200 200. No death case"
 // Will see if it passes the rest. If not, modify.
+
+// If the philo has started eating, should that be the last meal timestamp
+// or should it be right before it goes to sleep?
 
 void	eat_even(t_philo *philo)
 {
