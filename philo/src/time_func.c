@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   time_func.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan <juan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 14:58:00 by juan              #+#    #+#             */
-/*   Updated: 2024/03/27 18:24:10 by juan             ###   ########.fr       */
+/*   Updated: 2024/04/06 16:53:14 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+static unsigned long	get_time_elapsed(struct timeval start,
+							struct timeval current);
 
 unsigned long	get_time(void)
 {
@@ -19,4 +22,31 @@ unsigned long	get_time(void)
 	if (gettimeofday(&time, NULL) == -1)
 		return (0);
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+}
+
+void	best_usleep(unsigned long sleep_time)
+{
+	struct timeval	start;
+	struct timeval	current;
+	unsigned long	time_elapsed;
+	unsigned long	time_rem;
+
+	gettimeofday(&start, NULL);
+	time_elapsed = 0;
+	time_rem = 0;
+	while (time_elapsed < sleep_time)
+	{
+		gettimeofday(&current, NULL);
+		time_elapsed = get_time_elapsed(start, current);
+		time_rem = time_elapsed - sleep_time;
+		if (time_rem > 1000)
+			usleep(time_rem / 2);
+	}
+}
+
+static unsigned long	get_time_elapsed(struct timeval start,
+		struct timeval current)
+{
+	return ((current.tv_sec - start.tv_sec) * 1000000UL + (current.tv_usec
+			- start.tv_usec));
 }
