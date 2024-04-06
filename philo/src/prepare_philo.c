@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 13:29:29 by juan              #+#    #+#             */
-/*   Updated: 2024/04/05 14:22:44 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/06 15:37:21 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static t_program	*start_mutex(t_program *program);
 static t_program	*philo_init_loop(t_program *program);
+static void			destroy_mutex_forks(t_program *program, int index);
+static void			destroy_all_mutexs(t_program *program);
 
 t_program	*prepare_philo(t_program *program)
 {
@@ -29,11 +31,14 @@ t_program	*prepare_philo(t_program *program)
 	}
 	if (start_mutex(program) == NULL)
 	{
+		free(program->philos);
 		free(program->forks);
 		return (NULL);
 	}
 	if (philo_init_loop(program) == NULL)
 	{
+		destroy_all_mutexs(program);
+		free(program->philos);
 		free(program->forks);
 		return (NULL);
 	}
@@ -49,11 +54,19 @@ static t_program	*start_mutex(t_program *program)
 		return (error_msgs(MUTEX_INIT_ERROR));
 	program->philos_status = ALIVE;
 	if (pthread_mutex_init(&program->status_mutex, NULL) != 0)
+	{
+		pthread_mutex_destroy(&program->philos_full_mutex);
 		return (error_msgs(MUTEX_INIT_ERROR));
+	}
 	while (++i < program->num_philo)
 	{
 		if (pthread_mutex_init(&program->forks[i], NULL) != 0)
+		{
+			pthread_mutex_destroy(&program->philos_full_mutex);
+			pthread_mutex_destroy(&program->status_mutex);
+			destroy_mutex_forks(program, i - 1);
 			return (error_msgs(MUTEX_INIT_ERROR));
+		}
 	}
 	return (program);
 }
@@ -83,4 +96,20 @@ static t_program	*philo_init_loop(t_program *program)
 		program->philos[i].program = program;
 	}
 	return (program);
+}
+
+static void	destroy_mutex_forks(t_program *program, int index)
+{
+	while (index >= 0)
+	{
+		pthread_mutex_destroy(&program->forks[index]);
+		index--;
+	}
+}
+
+static void	destroy_all_mutexs(t_program *program)
+{
+	pthread_mutex_destroy(&program->philos_full_mutex);
+	pthread_mutex_destroy(&program->status_mutex);
+	destroy_mutex_forks(program, program->num_philo - 1);
 }
