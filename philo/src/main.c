@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 00:09:59 by juan_est145       #+#    #+#             */
-/*   Updated: 2024/04/06 15:19:34 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/06 15:44:49 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ int	main(int argc, char *argv[])
 		}
 		if (init_threads(program) == NULL)
 		{
-			free(program->philos);
-			free(program);
+			cleanup(program);
 			return (1);
 		}
 		cleanup(program);
