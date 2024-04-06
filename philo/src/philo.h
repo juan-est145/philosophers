@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 10:41:04 by juan_est145       #+#    #+#             */
-/*   Updated: 2024/04/06 16:57:18 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/06 17:35:26 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ typedef struct s_philo
 	int						id;
 	pthread_mutex_t			*left_fork;
 	pthread_mutex_t			*right_fork;
-	unsigned long			last_ate;
-	unsigned long			start_time;
+	long					last_ate;
+	long					start_time;
 	int						meals_eaten;
 	int						*philos_full;
 	pthread_mutex_t			*philos_full_mutex;
@@ -78,7 +78,7 @@ void						*observer_routine(void *arg);
 unsigned long				get_time(void);
 t_status					check_deaths(t_program *program);
 t_status					print_check(t_philo *philo);
-void						best_usleep(unsigned long sleep_time);
+void						best_usleep(long sleep_time);
 
 // Philo actions
 void						eat_even(t_philo *philo);
