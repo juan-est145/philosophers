@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 10:41:04 by juan_est145       #+#    #+#             */
-/*   Updated: 2024/04/05 19:26:15 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/06 14:24:31 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void						odd_philo(t_philo *philo);
 void						*observer_routine(void *arg);
 unsigned long				get_time(void);
 t_status					check_deaths(t_program *program);
+t_status					print_check(t_philo *philo);
 
 // Philo actions
 void						eat_even(t_philo *philo);

@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 14:26:28 by juestrel          #+#    #+#             */
-/*   Updated: 2024/04/05 16:52:22 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/06 14:28:03 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,15 @@
 void	eat_even(t_philo *philo)
 {
 	pthread_mutex_lock(philo->right_fork);
-	printf("%lu %d has taken a fork\n", get_time() - philo->start_time,
-		philo->id);
+	if (print_check(philo) == ALIVE)
+		printf("%lu %d has taken a fork\n", get_time() - philo->start_time,
+			philo->id);
 	pthread_mutex_lock(philo->left_fork);
-	printf("%lu %d has taken a fork\n", get_time() - philo->start_time,
-		philo->id);
-	printf("%lu %d is eating\n", get_time() - philo->start_time, philo->id);
+	if (print_check(philo) == ALIVE)
+		printf("%lu %d has taken a fork\n", get_time() - philo->start_time,
+			philo->id);
+	if (print_check(philo) == ALIVE)
+		printf("%lu %d is eating\n", get_time() - philo->start_time, philo->id);
 	philo->last_ate = get_time();
 	philo->meals_eaten++;
 	if (philo->meals_eaten == philo->program->numb_times_to_eat)
@@ -37,12 +40,15 @@ void	eat_even(t_philo *philo)
 void	eat_odd(t_philo *philo)
 {
 	pthread_mutex_lock(philo->left_fork);
-	printf("%lu %d has taken a fork\n", get_time() - philo->start_time,
-		philo->id);
+	if (print_check(philo) == ALIVE)
+		printf("%lu %d has taken a fork\n", get_time() - philo->start_time,
+			philo->id);
 	pthread_mutex_lock(philo->right_fork);
-	printf("%lu %d has taken a fork\n", get_time() - philo->start_time,
-		philo->id);
-	printf("%lu %d is eating\n", get_time() - philo->start_time, philo->id);
+	if (print_check(philo) == ALIVE)
+		printf("%lu %d has taken a fork\n", get_time() - philo->start_time,
+			philo->id);
+	if (print_check(philo) == ALIVE)
+		printf("%lu %d is eating\n", get_time() - philo->start_time, philo->id);
 	philo->last_ate = get_time();
 	philo->meals_eaten++;
 	if (philo->meals_eaten == philo->program->numb_times_to_eat)
@@ -58,11 +64,15 @@ void	eat_odd(t_philo *philo)
 
 void	rest(t_philo *philo)
 {
-	printf("%lu %d is sleeping\n", get_time() - philo->start_time, philo->id);
+	if (print_check(philo) == ALIVE)
+		printf("%lu %d is sleeping\n", get_time() - philo->start_time,
+			philo->id);
 	usleep(philo->program->time_to_sleep * 1000);
 }
 
 void	think(t_philo *philo)
 {
-	printf("%lu %d is thinking\n", get_time() - philo->start_time, philo->id);
+	if (print_check(philo) == ALIVE)
+		printf("%lu %d is thinking\n", get_time() - philo->start_time,
+			philo->id);
 }

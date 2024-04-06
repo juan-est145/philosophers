@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:10:52 by juestrel          #+#    #+#             */
-/*   Updated: 2024/04/05 19:38:44 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/06 14:24:01 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,17 @@ t_status	check_deaths(t_program *program)
 		}
 		i++;
 	}
+	return (ALIVE);
+}
+
+t_status	print_check(t_philo *philo)
+{
+	pthread_mutex_lock(philo->status_mutex);
+	if (*philo->status == DEAD)
+	{
+		pthread_mutex_unlock(philo->status_mutex);
+		return (DEAD);
+	}
+	pthread_mutex_unlock(philo->status_mutex);
 	return (ALIVE);
 }
