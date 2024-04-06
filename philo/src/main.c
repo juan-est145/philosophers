@@ -6,13 +6,15 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 00:09:59 by juan_est145       #+#    #+#             */
-/*   Updated: 2024/04/06 16:02:26 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/06 16:16:18 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 static void	cleanup(t_program *program);
+
+//TO DO: Make sure that I include the case where there is only one philo
 
 int	main(int argc, char *argv[])
 {
