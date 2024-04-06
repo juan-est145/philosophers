@@ -6,14 +6,22 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 14:26:28 by juestrel          #+#    #+#             */
-/*   Updated: 2024/04/06 17:28:30 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/06 19:11:27 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+//For both eat even and eat odd I added this condition:
+// if (philo->meals_eaten > 0)
+//		best_usleep(1 * 1000);
+//This condition passes the "5 800 200 200. No death case"
+// Will see if it passes the rest. If not, modify.
+
 void	eat_even(t_philo *philo)
 {
+	if (philo->meals_eaten > 0)
+		best_usleep(1 * 1000);
 	pthread_mutex_lock(philo->right_fork);
 	if (print_check(philo) == ALIVE)
 		printf("%lu %d has taken a fork\n", get_time() - philo->start_time,
@@ -39,6 +47,8 @@ void	eat_even(t_philo *philo)
 
 void	eat_odd(t_philo *philo)
 {
+	if (philo->meals_eaten > 0)
+		best_usleep(1 * 1000);
 	pthread_mutex_lock(philo->left_fork);
 	if (print_check(philo) == ALIVE)
 		printf("%lu %d has taken a fork\n", get_time() - philo->start_time,
