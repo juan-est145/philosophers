@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:10:52 by juestrel          #+#    #+#             */
-/*   Updated: 2024/04/06 20:16:42 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/08 17:03:46 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_status	check_deaths(t_program *program)
 	i = 0;
 	while (i < program->num_philo)
 	{
-		if (get_time() - program->philos[i].last_ate >= program->time_to_die)
+		if (get_time() - program->philos[i].last_ate > program->time_to_die)
 		{
 			pthread_mutex_lock(&program->status_mutex);
 			program->philos_status = DEAD;
