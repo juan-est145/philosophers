@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 14:26:28 by juestrel          #+#    #+#             */
-/*   Updated: 2024/04/06 20:16:58 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/08 13:50:21 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@
 
 void	eat_even(t_philo *philo)
 {
-	if (philo->meals_eaten > 0)
-		best_usleep(1 * 1000);
 	pthread_mutex_lock(philo->right_fork);
 	if (print_check(philo) == ALIVE)
 		printf("%lu %d has taken a fork\n", get_time() - philo->start_time,
@@ -47,8 +45,6 @@ void	eat_even(t_philo *philo)
 
 void	eat_odd(t_philo *philo)
 {
-	if (philo->meals_eaten > 0)
-		best_usleep(1 * 1000);
 	pthread_mutex_lock(philo->left_fork);
 	if (print_check(philo) == ALIVE)
 		printf("%lu %d has taken a fork\n", get_time() - philo->start_time,
@@ -85,4 +81,7 @@ void	think(t_philo *philo)
 	if (print_check(philo) == ALIVE)
 		printf("%lu %d is thinking\n", get_time() - philo->start_time,
 			philo->id);
+	if (philo->program->num_philo % 2 != 0)
+		best_usleep((long)((philo->program->time_to_eat * 2)
+				- philo->program->time_to_sleep));
 }
