@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/26 00:09:59 by juan_est145       #+#    #+#             */
-/*   Updated: 2024/04/06 16:16:18 by juestrel         ###   ########.fr       */
+/*   Created: 2024/04/09 13:54:05 by juestrel          #+#    #+#             */
+/*   Updated: 2024/04/09 13:54:08 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	cleanup(t_program *program);
 
-//TO DO: Make sure that I include the case where there is only one philo
+// TO DO: Make sure that I include the case where there is only one philo
 
 int	main(int argc, char *argv[])
 {
