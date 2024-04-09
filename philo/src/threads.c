@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 17:29:19 by juan              #+#    #+#             */
-/*   Updated: 2024/04/06 15:46:40 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/09 11:48:34 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	*philo_routine(void *philo)
 	t_philo	*current_philo;
 
 	current_philo = (t_philo *)philo;
+	current_philo->last_ate = get_time();
 	if (current_philo->id % 2 == 0)
 		even_philo(current_philo);
 	else if (current_philo->id % 2 != 0)
