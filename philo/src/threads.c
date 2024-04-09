@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 17:29:19 by juan              #+#    #+#             */
-/*   Updated: 2024/04/09 11:48:34 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/09 12:43:23 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,22 @@ t_program	*init_threads(t_program *program)
 	int			i;
 
 	i = -1;
-	if (pthread_create(&observer, NULL, &observer_routine, program) != 0)
-		return (error_msgs(THREAD_ERROR));
 	while (++i < program->num_philo)
 	{
 		if (pthread_create(&program->philos[i].thread, NULL, &philo_routine,
 				&program->philos[i]) != 0)
 			return (error_msgs(THREAD_ERROR));
 	}
-	if (pthread_join(observer, NULL) != 0)
-		return (error_msgs(THREAD_JOIN_ERROR));
+	if (pthread_create(&observer, NULL, &observer_routine, program) != 0)
+		return (error_msgs(THREAD_ERROR));
 	i = -1;
 	while (++i < program->num_philo)
 	{
 		if (pthread_join(program->philos[i].thread, NULL) != 0)
 			return (error_msgs(THREAD_JOIN_ERROR));
 	}
+	if (pthread_join(observer, NULL) != 0)
+		return (error_msgs(THREAD_JOIN_ERROR));
 	return (program);
 }
 
