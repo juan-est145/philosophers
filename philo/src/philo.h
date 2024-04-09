@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 10:41:04 by juan_est145       #+#    #+#             */
-/*   Updated: 2024/04/06 20:14:56 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/09 13:18:20 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include <stdlib.h>
 #include <sys/time.h>
 #include <unistd.h>
+
+#define MICRO_SECOND_APROX 920
 
 typedef struct s_program	t_program;
 typedef struct s_philo		t_philo;

@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 14:58:00 by juan              #+#    #+#             */
-/*   Updated: 2024/04/09 13:00:22 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/09 13:18:45 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	best_usleep(long sleep_time)
 	long	time;
 
 	time = get_time();
-	usleep(sleep_time * 920);
+	usleep(sleep_time * MICRO_SECOND_APROX);
 	while (get_time() < time + sleep_time)
 		usleep(sleep_time * 3);
 }
