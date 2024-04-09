@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:53:48 by juestrel          #+#    #+#             */
-/*   Updated: 2024/04/09 13:53:52 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/09 15:04:37 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_philo
 	pthread_mutex_t			*philos_full_mutex;
 	t_status				*status;
 	pthread_mutex_t			*status_mutex;
+	pthread_mutex_t			*write_mutex;
 	t_program				*program;
 }							t_philo;
 
@@ -57,6 +58,7 @@ typedef struct s_program
 	pthread_mutex_t			*forks;
 	t_status				philos_status;
 	pthread_mutex_t			status_mutex;
+	pthread_mutex_t			write_mutex;
 }							t_program;
 
 typedef enum e_errors
@@ -68,6 +70,13 @@ typedef enum e_errors
 	THREAD_JOIN_ERROR,
 	TIME_FAILURE
 }							t_errors;
+
+typedef enum e_failed_mutex
+{
+	STATUS_MUTEX,
+	WRITE_MUTEX,
+	FORKS
+}							t_failed_mutex;
 
 t_program					*parse_arguments(int argc, char *argv[]);
 void						*error_msgs(t_errors error_type);
@@ -81,6 +90,8 @@ long						get_time(void);
 t_status					check_deaths(t_program *program);
 t_status					print_check(t_philo *philo);
 void						best_usleep(long sleep_time);
+void						*mutex_init_error_handler(t_program *program,
+								t_failed_mutex failed_mutex, int i);
 
 // Philo actions
 void						eat_even(t_philo *philo);

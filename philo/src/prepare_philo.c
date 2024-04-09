@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:54:25 by juestrel          #+#    #+#             */
-/*   Updated: 2024/04/09 13:54:27 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/09 15:15:41 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,19 +54,13 @@ static t_program	*start_mutex(t_program *program)
 		return (error_msgs(MUTEX_INIT_ERROR));
 	program->philos_status = ALIVE;
 	if (pthread_mutex_init(&program->status_mutex, NULL) != 0)
-	{
-		pthread_mutex_destroy(&program->philos_full_mutex);
-		return (error_msgs(MUTEX_INIT_ERROR));
-	}
+		return (mutex_init_error_handler(program, STATUS_MUTEX, i));
+	if (pthread_mutex_init(&program->write_mutex, NULL) != 0)
+		return (mutex_init_error_handler(program, WRITE_MUTEX, i));
 	while (++i < program->num_philo)
 	{
 		if (pthread_mutex_init(&program->forks[i], NULL) != 0)
-		{
-			pthread_mutex_destroy(&program->philos_full_mutex);
-			pthread_mutex_destroy(&program->status_mutex);
-			destroy_mutex_forks(program, i - 1);
-			return (error_msgs(MUTEX_INIT_ERROR));
-		}
+			return (mutex_init_error_handler(program, FORKS, i - 1));
 	}
 	return (program);
 }
@@ -93,6 +87,7 @@ static t_program	*philo_init_loop(t_program *program)
 		program->philos[i].philos_full_mutex = &program->philos_full_mutex;
 		program->philos[i].status = &program->philos_status;
 		program->philos[i].status_mutex = &program->status_mutex;
+		program->philos[i].write_mutex = &program->write_mutex;
 		program->philos[i].program = program;
 	}
 	return (program);
