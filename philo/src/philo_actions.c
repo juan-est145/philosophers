@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 14:26:28 by juestrel          #+#    #+#             */
-/*   Updated: 2024/04/09 18:54:39 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/09 19:39:53 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,11 @@ void	think(t_philo *philo)
 	if (print_check(philo) == ALIVE)
 		print_philo_status("is thinking\n", get_time() - philo->start_time,
 			philo);
+	if (philo->program->num_philo % 2 != 0)
+		best_usleep((philo->program->time_to_eat * 2)
+			- philo->program->time_to_sleep);
 }
+// time_to_think = (time_to_eat * 2) - time_to_sleep)
 
 static void	print_philo_status(char *message, long time, t_philo *philo)
 {
