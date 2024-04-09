@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:54:25 by juestrel          #+#    #+#             */
-/*   Updated: 2024/04/09 15:15:41 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/09 15:30:06 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static t_program	*start_mutex(t_program *program);
 static t_program	*philo_init_loop(t_program *program);
-static void			destroy_mutex_forks(t_program *program, int index);
 static void			destroy_all_mutexs(t_program *program);
 
 t_program	*prepare_philo(t_program *program)
@@ -93,7 +92,7 @@ static t_program	*philo_init_loop(t_program *program)
 	return (program);
 }
 
-static void	destroy_mutex_forks(t_program *program, int index)
+void	destroy_mutex_forks(t_program *program, int index)
 {
 	while (index >= 0)
 	{

@@ -6,30 +6,27 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 14:26:28 by juestrel          #+#    #+#             */
-/*   Updated: 2024/04/09 13:08:29 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/09 15:29:02 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-// For both eat even and eat odd I added this condition:
-// if (philo->meals_eaten > 0)
-//		best_usleep(1 * 1000);
-// This condition passes the "5 800 200 200. No death case"
-// Will see if it passes the rest. If not, modify.
+static void	print_philo_status(char *message, long time, t_philo *philo);
 
 void	eat_even(t_philo *philo)
 {
 	pthread_mutex_lock(philo->right_fork);
 	if (print_check(philo) == ALIVE)
-		printf("%lu %d has taken a fork\n", get_time() - philo->start_time,
-			philo->id);
+		print_philo_status("has taken a fork\n", get_time() - philo->start_time,
+			philo);
 	pthread_mutex_lock(philo->left_fork);
 	if (print_check(philo) == ALIVE)
-		printf("%lu %d has taken a fork\n", get_time() - philo->start_time,
-			philo->id);
+		print_philo_status("has taken a fork\n", get_time() - philo->start_time,
+			philo);
 	if (print_check(philo) == ALIVE)
-		printf("%lu %d is eating\n", get_time() - philo->start_time, philo->id);
+		print_philo_status("is eating\n", get_time() - philo->start_time,
+			philo);
 	philo->last_ate = get_time();
 	philo->meals_eaten++;
 	if (philo->meals_eaten == philo->program->numb_times_to_eat)
@@ -47,14 +44,15 @@ void	eat_odd(t_philo *philo)
 {
 	pthread_mutex_lock(philo->left_fork);
 	if (print_check(philo) == ALIVE)
-		printf("%lu %d has taken a fork\n", get_time() - philo->start_time,
-			philo->id);
+		print_philo_status("has taken a fork\n", get_time() - philo->start_time,
+			philo);
 	pthread_mutex_lock(philo->right_fork);
 	if (print_check(philo) == ALIVE)
-		printf("%lu %d has taken a fork\n", get_time() - philo->start_time,
-			philo->id);
+		print_philo_status("has taken a fork\n", get_time() - philo->start_time,
+			philo);
 	if (print_check(philo) == ALIVE)
-		printf("%lu %d is eating\n", get_time() - philo->start_time, philo->id);
+		print_philo_status("is eating\n", get_time() - philo->start_time,
+			philo);
 	philo->last_ate = get_time();
 	philo->meals_eaten++;
 	if (philo->meals_eaten == philo->program->numb_times_to_eat)
@@ -71,17 +69,24 @@ void	eat_odd(t_philo *philo)
 void	rest(t_philo *philo)
 {
 	if (print_check(philo) == ALIVE)
-		printf("%lu %d is sleeping\n", get_time() - philo->start_time,
-			philo->id);
+		print_philo_status("is sleeping\n", get_time() - philo->start_time,
+			philo);
 	best_usleep((long)philo->program->time_to_sleep);
 }
 
 void	think(t_philo *philo)
 {
 	if (print_check(philo) == ALIVE)
-		printf("%lu %d is thinking\n", get_time() - philo->start_time,
-			philo->id);
+		print_philo_status("is thinking\n", get_time() - philo->start_time,
+			philo);
 	if (philo->program->num_philo % 2 != 0)
 		best_usleep((long)((philo->program->time_to_eat * 2)
 				- philo->program->time_to_sleep));
+}
+
+static void	print_philo_status(char *message, long time, t_philo *philo)
+{
+	pthread_mutex_lock(philo->write_mutex);
+	printf("%lu %d %s", time, philo->id, message);
+	pthread_mutex_unlock(philo->write_mutex);
 }

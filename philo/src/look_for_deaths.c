@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:10:52 by juestrel          #+#    #+#             */
-/*   Updated: 2024/04/08 17:03:46 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/09 15:18:30 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,11 @@ t_status	check_deaths(t_program *program)
 		{
 			pthread_mutex_lock(&program->status_mutex);
 			program->philos_status = DEAD;
+			pthread_mutex_unlock(&program->status_mutex);
+			pthread_mutex_lock(&program->write_mutex);
 			printf("%lu %d died\n", get_time() - program->philos->start_time,
 				program->philos[i].id);
-			pthread_mutex_unlock(&program->status_mutex);
+			pthread_mutex_unlock(&program->write_mutex);
 			return (DEAD);
 		}
 		i++;
