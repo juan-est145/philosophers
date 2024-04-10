@@ -18,7 +18,7 @@ HEADER = $(SRCS_PATH)philo.h
 
 COMPILER = $(CC)
 
-CFLAGS = -Wall -Wextra -Werror -pthread -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror -pthread
 
 EXEC-NAME-FLAG = -o
 
@@ -38,5 +38,5 @@ fclean: clean
 re: fclean
 	$(MAKE) all
 
-debug: CFLAGS += -g
+debug: CFLAGS += -g -fsanitize=thread
 debug: $(NAME)
