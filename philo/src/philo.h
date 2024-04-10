@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:53:48 by juestrel          #+#    #+#             */
-/*   Updated: 2024/04/10 12:29:48 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/10 13:22:08 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_philo
 	pthread_mutex_t			*status_mutex;
 	pthread_mutex_t			*write_mutex;
 	t_program				*program;
+	pthread_mutex_t			*time_mutex;
 }							t_philo;
 
 typedef struct s_program
@@ -59,6 +60,7 @@ typedef struct s_program
 	t_status				philos_status;
 	pthread_mutex_t			status_mutex;
 	pthread_mutex_t			write_mutex;
+	pthread_mutex_t			time_mutex;
 }							t_program;
 
 typedef enum e_errors
@@ -75,6 +77,7 @@ typedef enum e_failed_mutex
 {
 	STATUS_MUTEX,
 	WRITE_MUTEX,
+	TIME_MUTEX,
 	FORKS
 }							t_failed_mutex;
 
@@ -94,6 +97,7 @@ void						*mutex_init_error_handler(t_program *program,
 								t_failed_mutex failed_mutex, int i);
 void						destroy_mutex_forks(t_program *program, int index);
 void						handle_one_philo(t_philo *philo);
+bool						philos_full(t_program *program);
 
 // Philo actions
 void						eat_even(t_philo *philo);

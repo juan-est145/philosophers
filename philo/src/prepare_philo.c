@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:54:25 by juestrel          #+#    #+#             */
-/*   Updated: 2024/04/09 15:30:06 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/10 13:44:14 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ static t_program	*start_mutex(t_program *program)
 		return (mutex_init_error_handler(program, STATUS_MUTEX, i));
 	if (pthread_mutex_init(&program->write_mutex, NULL) != 0)
 		return (mutex_init_error_handler(program, WRITE_MUTEX, i));
+	if (pthread_mutex_init(&program->time_mutex, NULL) != 0)
+		return (mutex_init_error_handler(program, TIME_MUTEX, i));
 	while (++i < program->num_philo)
 	{
 		if (pthread_mutex_init(&program->forks[i], NULL) != 0)
@@ -87,6 +89,7 @@ static t_program	*philo_init_loop(t_program *program)
 		program->philos[i].status = &program->philos_status;
 		program->philos[i].status_mutex = &program->status_mutex;
 		program->philos[i].write_mutex = &program->write_mutex;
+		program->philos[i].time_mutex = &program->time_mutex;
 		program->philos[i].program = program;
 	}
 	return (program);

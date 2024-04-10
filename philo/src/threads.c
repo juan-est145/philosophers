@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:53:57 by juestrel          #+#    #+#             */
-/*   Updated: 2024/04/09 13:54:00 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/10 13:51:57 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,11 @@ void	*philo_routine(void *philo)
 	t_philo	*current_philo;
 
 	current_philo = (t_philo *)philo;
+	pthread_mutex_lock(&current_philo->program->time_mutex);
 	current_philo->last_ate = get_time();
+	pthread_mutex_unlock(&current_philo->program->time_mutex);
+	if (current_philo->program->num_philo == 1)
+		handle_one_philo(philo);
 	if (current_philo->id % 2 == 0)
 		even_philo(current_philo);
 	else if (current_philo->id % 2 != 0)
@@ -80,7 +84,7 @@ void	*observer_routine(void *arg)
 	while (1)
 	{
 		if (check_deaths(program) == DEAD
-			|| program->philos_full == program->num_philo)
+			|| philos_full(program) == true)
 			break ;
 	}
 	return (program);

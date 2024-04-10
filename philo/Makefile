@@ -18,7 +18,7 @@ HEADER = $(SRCS_PATH)philo.h
 
 COMPILER = $(CC)
 
-CFLAGS = -Wall -Wextra -Werror -pthread
+CFLAGS = -Wall -Wextra -Werror -pthread -fsanitize=thread
 
 EXEC-NAME-FLAG = -o
 

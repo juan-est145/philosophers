@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:54:05 by juestrel          #+#    #+#             */
-/*   Updated: 2024/04/09 15:16:12 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/10 12:50:46 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static void	cleanup(t_program *program)
 	pthread_mutex_destroy(&program->philos_full_mutex);
 	pthread_mutex_destroy(&program->status_mutex);
 	pthread_mutex_destroy(&program->write_mutex);
+	pthread_mutex_destroy(&program->time_mutex);
 	while (i < program->num_philo)
 	{
 		pthread_mutex_destroy(&program->forks[i]);
