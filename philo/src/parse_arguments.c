@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:54:50 by juestrel          #+#    #+#             */
-/*   Updated: 2024/04/09 13:54:58 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/10 14:40:05 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_program	*parse_arguments(int argc, char *argv[])
 		i = 0;
 		while (argv[j][i] != '\0')
 		{
-			if (!(argv[j][i] >= '0' && argv[j][i] <= '9') && argv[1][0] != '0')
+			if (!(argv[j][i] >= '0' && argv[j][i] <= '9') || argv[j][0] == '0')
 				return (error_msgs(INVALID_ARGUMENTS));
 			i++;
 		}
