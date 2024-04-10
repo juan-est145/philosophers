@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:10:52 by juestrel          #+#    #+#             */
-/*   Updated: 2024/04/10 13:56:11 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/10 13:58:54 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,9 @@ t_status	print_check(t_philo *philo)
 void	handle_one_philo(t_philo *philo)
 {
 	pthread_mutex_lock(philo->right_fork);
+	if (print_check(philo) == ALIVE)
+		print_philo_status("has taken a fork\n", get_time() - philo->start_time,
+			philo);
 	while (1)
 	{
 		pthread_mutex_lock(philo->status_mutex);

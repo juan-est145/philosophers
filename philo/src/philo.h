@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:53:48 by juestrel          #+#    #+#             */
-/*   Updated: 2024/04/10 13:22:08 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/10 13:59:53 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ void						*mutex_init_error_handler(t_program *program,
 void						destroy_mutex_forks(t_program *program, int index);
 void						handle_one_philo(t_philo *philo);
 bool						philos_full(t_program *program);
+void						print_philo_status(char *message, long time,
+								t_philo *philo);
 
 // Philo actions
 void						eat_even(t_philo *philo);

@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:53:57 by juestrel          #+#    #+#             */
-/*   Updated: 2024/04/10 13:56:55 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/10 14:08:15 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,24 +56,32 @@ void	*philo_routine(void *philo)
 
 void	even_philo(t_philo *philo)
 {
+	pthread_mutex_lock(philo->status_mutex);
 	while (*philo->status != DEAD
 		&& philo->meals_eaten != philo->program->numb_times_to_eat)
 	{
+		pthread_mutex_unlock(philo->status_mutex);
 		eat_even(philo);
 		rest(philo);
 		think(philo);
+		pthread_mutex_lock(philo->status_mutex);
 	}
+	pthread_mutex_unlock(philo->status_mutex);
 }
 
 void	odd_philo(t_philo *philo)
 {
+	pthread_mutex_lock(philo->status_mutex);
 	while (*philo->status != DEAD
 		&& philo->meals_eaten != philo->program->numb_times_to_eat)
 	{
+		pthread_mutex_unlock(philo->status_mutex);
 		eat_odd(philo);
 		rest(philo);
 		think(philo);
+		pthread_mutex_lock(philo->status_mutex);
 	}
+	pthread_mutex_unlock(philo->status_mutex);
 }
 
 void	*observer_routine(void *arg)
@@ -83,8 +91,7 @@ void	*observer_routine(void *arg)
 	program = (t_program *)arg;
 	while (1)
 	{
-		if (check_deaths(program) == DEAD
-			|| philos_full(program) == true)
+		if (check_deaths(program) == DEAD || philos_full(program) == true)
 			break ;
 	}
 	return (program);

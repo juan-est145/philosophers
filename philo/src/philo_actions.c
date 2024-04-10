@@ -6,13 +6,11 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 14:26:28 by juestrel          #+#    #+#             */
-/*   Updated: 2024/04/10 13:51:31 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/10 13:59:41 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-static void	print_philo_status(char *message, long time, t_philo *philo);
 
 void	eat_even(t_philo *philo)
 {
@@ -87,9 +85,8 @@ void	think(t_philo *philo)
 		best_usleep((philo->program->time_to_eat * 2)
 			- philo->program->time_to_sleep);
 }
-// time_to_think = (time_to_eat * 2) - time_to_sleep)
 
-static void	print_philo_status(char *message, long time, t_philo *philo)
+void	print_philo_status(char *message, long time, t_philo *philo)
 {
 	pthread_mutex_lock(philo->write_mutex);
 	printf("%lu %d %s", time, philo->id, message);
