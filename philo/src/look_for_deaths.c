@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:10:52 by juestrel          #+#    #+#             */
-/*   Updated: 2024/04/09 15:18:30 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/10 12:32:15 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,13 @@ t_status	print_check(t_philo *philo)
 	}
 	pthread_mutex_unlock(philo->status_mutex);
 	return (ALIVE);
+}
+
+void	handle_one_philo(t_philo *philo)
+{
+	while (*philo->status == ALIVE)
+	{
+		(void)philo;
+	}
+	pthread_mutex_unlock(philo->right_fork);
 }

@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 14:26:28 by juestrel          #+#    #+#             */
-/*   Updated: 2024/04/09 19:39:53 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/10 12:30:10 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	eat_odd(t_philo *philo)
 	if (print_check(philo) == ALIVE)
 		print_philo_status("has taken a fork\n", get_time() - philo->start_time,
 			philo);
+	if (philo->program->num_philo == 1)
+		handle_one_philo(philo);
 	pthread_mutex_lock(philo->left_fork);
 	if (print_check(philo) == ALIVE)
 		print_philo_status("has taken a fork\n", get_time() - philo->start_time,

@@ -6,7 +6,7 @@
 /*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:53:48 by juestrel          #+#    #+#             */
-/*   Updated: 2024/04/09 15:30:21 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/10 12:29:48 by juestrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void						best_usleep(long sleep_time);
 void						*mutex_init_error_handler(t_program *program,
 								t_failed_mutex failed_mutex, int i);
 void						destroy_mutex_forks(t_program *program, int index);
+void						handle_one_philo(t_philo *philo);
 
 // Philo actions
 void						eat_even(t_philo *philo);
