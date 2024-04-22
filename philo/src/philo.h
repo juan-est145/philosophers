@@ -3,21 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juestrel <juestrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juan-est145 <juan-est145@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:53:48 by juestrel          #+#    #+#             */
-/*   Updated: 2024/04/10 15:31:47 by juestrel         ###   ########.fr       */
+/*   Updated: 2024/04/22 19:34:51 by juan-est145      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <pthread.h>
-#include <stdbool.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/time.h>
-#include <unistd.h>
+#ifndef PHILO_H
+# define PHILO_H
 
-#define MICRO_SECOND_APROX 920
+# include <pthread.h>
+# include <stdbool.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <sys/time.h>
+# include <unistd.h>
+
+# define MICRO_SECOND_APROX 920
 
 typedef struct s_program	t_program;
 typedef struct s_philo		t_philo;
@@ -112,3 +115,4 @@ void						best_usleep(long sleep_time);
 void						*observer_routine(void *arg);
 t_status					check_deaths(t_program *program);
 bool						philos_full(t_program *program);
+#endif
